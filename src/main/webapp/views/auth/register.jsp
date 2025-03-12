@@ -1,3 +1,19 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.Map" %>
+
+<%
+
+    Map<String, String> errors = (Map<String, String>) session.getAttribute("errors");
+    session.removeAttribute("errors");
+
+
+    com.sportflow.dto.RegisterDTO old = (com.sportflow.dto.RegisterDTO) session.getAttribute("old");
+    session.removeAttribute("old");
+
+    String errorUser = (String) session.getAttribute("errorUser");
+    session.removeAttribute("errorUser");
+%>
+
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
@@ -53,7 +69,13 @@
                       class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                       placeholder="Jane Doe"
                       name="firstName"
+                      value="<%= old != null ? old.getFirstName() : "" %>"
                     />
+                      <% if (errors != null && errors.containsKey("firstName")) { %>
+                          <span class="text-xs text-red-600 dark:text-red-400">
+                            <%= errors.get("firstName") %>
+                          </span>
+                      <% } %>
                   </label>
                   <label class="block text-sm">
                       <span class="text-gray-700 dark:text-gray-400">Last name</span>
@@ -61,7 +83,13 @@
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                         placeholder="Jane Doe"
                         name="lastName"
+                        value="<%= old != null ? old.getLastName() : "" %>"
                       />
+                      <% if (errors != null && errors.containsKey("lastName")) { %>
+                            <span class="text-xs text-red-600 dark:text-red-400">
+                              <%= errors.get("lastName") %>
+                            </span>
+                        <% } %>
                   </label>
                   <label class="block text-sm">
                         <span class="text-gray-700 dark:text-gray-400">Email</span>
@@ -69,7 +97,13 @@
                           class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                           placeholder="Jane Doe"
                           name="email"
+                          value="<%= old != null ? old.getEmail() : "" %>"
                         />
+                        <% if (errors != null && errors.containsKey("email")) { %>
+                              <span class="text-xs text-red-600 dark:text-red-400">
+                                <%= errors.get("email") %>
+                              </span>
+                        <% } %>
                   </label>
                   <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">Password</span>
@@ -79,6 +113,11 @@
                       type="password"
                       name="password"
                     />
+                    <% if (errors != null && errors.containsKey("password")) { %>
+                          <span class="text-xs text-red-600 dark:text-red-400">
+                            <%= errors.get("password") %>
+                          </span>
+                    <% } %>
                   </label>
                   <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
@@ -90,19 +129,21 @@
                       type="password"
                       name="confirmPassword"
                     />
+                    <% if (errors != null && errors.containsKey("confirmPassword")) { %>
+                          <span class="text-xs text-red-600 dark:text-red-400">
+                            <%= errors.get("confirmPassword") %>
+                          </span>
+                    <% } %>
                   </label>
 
                   <!-- You should use a button here, as the anchor is only used for the example  -->
-                  <a
+                  <button
+                    type="submit"
                     class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                    href="./login.html"
-                  >
+                    >
                     Create account
-                  </a>
+                  </button>
               </form>
-
-
-
 
               <p class="mt-4">
                 <a
