@@ -101,4 +101,40 @@ public class UserDAO extends ConnectToDB {
             e.printStackTrace();
         }
     }
+
+    public User authenticateByEmail (String email) {
+        User user = null;
+
+        try (
+                Connection con = getConnection();
+                PreparedStatement stmt = con.prepareStatement(GET_USER_BY_EMAIL);
+        ){
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String userEmail = rs.getString("email");
+                String role = rs.getString("role");
+                String password = rs.getString("password");
+
+                user = rs.getString("role").equals("trainer") ? new Trainer() : new Member();
+                user.setId(id);
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setEmail(userEmail);
+                user.setRole(role);
+                user.setPassword(password);
+
+            }
+        }
+        catch ( SQLException e ){
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
 }
