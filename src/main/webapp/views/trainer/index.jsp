@@ -13,8 +13,6 @@
                   list all trainers
                 </h2>
 
-                <%--todo make an if condition check if has trainers--%>
-
                 <div class="w-full overflow-hidden rounded-lg shadow-xs">
                   <div class="w-full overflow-x-auto">
 
