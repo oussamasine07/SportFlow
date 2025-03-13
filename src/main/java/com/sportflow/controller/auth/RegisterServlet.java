@@ -89,7 +89,9 @@ public class RegisterServlet extends HttpServlet {
                         .addPepper("somethignrealyhard")
                         .with(bcrypt);
                 registerDTO.setPassword(hash.getResult());
-                userDAO.registerUser( registerDTO );
+                registerDTO.setRole("trainer");
+                registerDTO.setIsAdmin(true);
+                userDAO.registerUser( registerDTO, 0 );
                 session.setAttribute("registerSuccess", "Register success, Please login");
                 res.sendRedirect(req.getContextPath() + "/auth/login");
             }

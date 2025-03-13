@@ -2,6 +2,16 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%
     User user = (User) session.getAttribute("user");
+
+    Map<String, String> errors = (Map<String, String>) session.getAttribute("errors");
+    session.removeAttribute("errors");
+
+
+    com.sportflow.dto.RegisterDTO old = (com.sportflow.dto.RegisterDTO) session.getAttribute("old");
+    session.removeAttribute("old");
+
+    String errorUser = (String) session.getAttribute("errorUser");
+    session.removeAttribute("errorUser");
 %>
     <jsp:include page="/views/parcials/sidebar.jsp" />
     <div class="flex flex-col flex-1 w-full">
@@ -27,10 +37,13 @@
                                       class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                       placeholder="Trainer first name"
                                       name="firstName"
+                                      value="<%= old != null ? old.getFirstName() : "" %>"
                                     />
-                                    <span class="text-xs text-red-600 dark:text-red-400">
-                                      Your password is too short.
-                                    </span>
+                                    <% if (errors != null && errors.containsKey("firstName")) { %>
+                                          <span class="text-xs text-red-600 dark:text-red-400">
+                                            <%= errors.get("firstName") %>
+                                          </span>
+                                      <% } %>
                                   </label>
                             </div>
 
@@ -44,10 +57,13 @@
                                       class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                       placeholder="Trainer last name"
                                       name="lastName"
+                                      value="<%= old != null ? old.getLastName() : "" %>"
                                     />
-                                    <span class="text-xs text-red-600 dark:text-red-400">
-                                      Your password is too short.
-                                    </span>
+                                    <% if (errors != null && errors.containsKey("lastName")) { %>
+                                        <span class="text-xs text-red-600 dark:text-red-400">
+                                          <%= errors.get("lastName") %>
+                                        </span>
+                                    <% } %>
                                   </label>
                             </div>
                             <div class="grid-span-1">
@@ -60,10 +76,13 @@
                                       class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                       placeholder="Trainer email"
                                       name="email"
+                                      value="<%= old != null ? old.getEmail() : "" %>"
                                     />
-                                    <span class="text-xs text-red-600 dark:text-red-400">
-                                      Your password is too short.
-                                    </span>
+                                    <% if (errors != null && errors.containsKey("email")) { %>
+                                          <span class="text-xs text-red-600 dark:text-red-400">
+                                            <%= errors.get("email") %>
+                                          </span>
+                                    <% } %>
                                   </label>
                             </div>
                             <div class="grid-span-1">
@@ -77,9 +96,11 @@
                                       placeholder="Trainer password"
                                       name="password"
                                     />
-                                    <span class="text-xs text-red-600 dark:text-red-400">
-                                      Your password is too short.
-                                    </span>
+                                    <% if (errors != null && errors.containsKey("password")) { %>
+                                          <span class="text-xs text-red-600 dark:text-red-400">
+                                            <%= errors.get("password") %>
+                                          </span>
+                                    <% } %>
                                   </label>
                             </div>
                             <div class="grid-span-1">
@@ -93,9 +114,11 @@
                                       placeholder="Trainer password"
                                       name="confirmPassword"
                                     />
-                                    <span class="text-xs text-red-600 dark:text-red-400">
-                                      Your password is too short.
-                                    </span>
+                                    <% if (errors != null && errors.containsKey("confirmPassword")) { %>
+                                          <span class="text-xs text-red-600 dark:text-red-400">
+                                            <%= errors.get("confirmPassword") %>
+                                          </span>
+                                    <% } %>
                                   </label>
                             </div>
                             <button

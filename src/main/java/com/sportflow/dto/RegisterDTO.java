@@ -24,6 +24,8 @@ public class RegisterDTO {
     @NotBlank(message = "password confimation is required")
     private String confirmPassword;
 
+    private boolean isAdmin;
+
 
     public RegisterDTO(String firstName, String lastName, String email, String role, String password, String confirmPassword) {
         this.firstName = firstName;
@@ -89,4 +91,7 @@ public class RegisterDTO {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+
+    public void setIsAdmin ( boolean isAdmin ) { this.isAdmin = isAdmin; }
+    public boolean getIsAdmin ( ) { return this.isAdmin; }
 }
