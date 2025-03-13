@@ -2,7 +2,7 @@
 <%
     User user = (User) session.getAttribute("user");
 %>
-    <jsp:include page="/views/parcials/header.jsp" />
+    <jsp:include page="/views/parcials/sidebar.jsp" />
     <div class="flex flex-col flex-1 w-full">
         <jsp:include page="/views/parcials/navbar.jsp" />
 
