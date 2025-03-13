@@ -24,6 +24,11 @@ CREATE TABLE trainers (
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE NULL
 );
 
+SELECT * FROM users
+inner join trainers
+on users.id = trainers.belongsTo
+WHERE users.id = 1;
+
 
 
 

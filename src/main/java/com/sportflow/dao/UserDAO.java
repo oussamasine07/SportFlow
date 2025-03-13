@@ -55,7 +55,7 @@ public class UserDAO extends ConnectToDB {
         ){
 
             stmt.setString(1, register.getFirstName());
-            stmt.setString(2, register.getFirstName());
+            stmt.setString(2, register.getLastName());
             stmt.setString(3, register.getEmail());
             stmt.setString(4, register.getPassword());
 

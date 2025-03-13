@@ -60,8 +60,6 @@
               </h1>
 
 
-
-
               <form action="${pageContext.request.contextPath}/auth/register" method="POST">
                 <label class="block text-sm">
                     <span class="text-gray-700 dark:text-gray-400">First name</span>
