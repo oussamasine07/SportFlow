@@ -18,6 +18,9 @@ public class RegisterDTO {
     //@NotBlank(message = "please select a role")
     private String role;
 
+    @Pattern(regexp = "^$|\\d{4}-\\d{2}-\\d{2}", message = "Invalid date format, expected yyyy-MM-dd")
+    private String dateOfBirth;
+
     @NotBlank(message = "password is required")
     private String password;
 
@@ -32,6 +35,16 @@ public class RegisterDTO {
         this.lastName = lastName;
         this.email = email;
         this.role = role;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
+
+    public RegisterDTO(String firstName, String lastName, String email, String role, String dateOfBirth, String password, String confirmPassword) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+        this.dateOfBirth = dateOfBirth;
         this.password = password;
         this.confirmPassword = confirmPassword;
     }
@@ -94,4 +107,12 @@ public class RegisterDTO {
 
     public void setIsAdmin ( boolean isAdmin ) { this.isAdmin = isAdmin; }
     public boolean getIsAdmin ( ) { return this.isAdmin; }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth( String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }

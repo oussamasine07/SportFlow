@@ -50,6 +50,7 @@ public class CreateMemberServlet extends HttpServlet {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String email = req.getParameter("email");
+        String dateOfBirth = req.getParameter("dateOfBirth");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
 
@@ -83,9 +84,12 @@ public class CreateMemberServlet extends HttpServlet {
                 Hash hash = Password.hash(registerDTO.getPassword())
                         .addPepper("somethignrealyhard")
                         .with(bcrypt);
+
                 registerDTO.setPassword(hash.getResult());
                 registerDTO.setRole("member");
                 registerDTO.setIsAdmin(false);
+                registerDTO.setDateOfBirth(dateOfBirth);
+
                 userDAO.registerUser( registerDTO, authUser.getId() );
                 session.setAttribute("registerSuccess", "Register success, Please login");
                 res.sendRedirect(req.getContextPath() + "/member");

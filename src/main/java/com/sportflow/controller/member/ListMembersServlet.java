@@ -32,7 +32,7 @@ public class ListMembersServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         List<Member> members = memberDAO.getAllMembersByAuthenticatedUser(user.getId());
-        members.forEach(mem -> System.out.println(mem.getFirstName()));
+
         req.setAttribute("members", members);
 
         RequestDispatcher rd = req.getRequestDispatcher("/views/member/index.jsp");

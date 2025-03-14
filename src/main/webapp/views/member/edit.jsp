@@ -20,12 +20,12 @@
         <main class="h-full overflow-y-auto">
             <div class="container px-6 mx-auto grid">
                 <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                  Edit Trainer <c:out value='${trainer.firstName}' />
+                  Edit Member <c:out value='${member.firstName}' />
                 </h2>
                 <div
                   class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
                 >
-                    <form action="${pageContext.request.contextPath}/trainer/edit?id=<c:out value='${trainer.id}' />" method="POST">
+                    <form action="${pageContext.request.contextPath}/member/edit?id=<c:out value='${member.id}' />" method="POST">
                         <div class="grid grid-cols-2">
                             <div class="grid-span-1 mt-4">
                                   <label class="block text-sm">
@@ -37,7 +37,7 @@
                                       class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                       placeholder="Trainer first name"
                                       name="firstName"
-                                      value="<c:out value='${trainer.firstName}' />"
+                                      value="<c:out value='${member.firstName}' />"
                                     />
                                     <% if (errors != null && errors.containsKey("firstName")) { %>
                                           <span class="text-xs text-red-600 dark:text-red-400">
@@ -57,7 +57,7 @@
                                       class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                       placeholder="Trainer last name"
                                       name="lastName"
-                                      value="<c:out value='${trainer.lastName}' />"
+                                      value="<c:out value='${member.lastName}' />"
                                     />
                                     <% if (errors != null && errors.containsKey("lastName")) { %>
                                         <span class="text-xs text-red-600 dark:text-red-400">
@@ -76,7 +76,7 @@
                                       class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                                       placeholder="Trainer email"
                                       name="email"
-                                      value="<c:out value='${trainer.email}' />"
+                                      value="<c:out value='${member.email}' />"
                                     />
                                     <% if (errors != null && errors.containsKey("email")) { %>
                                           <span class="text-xs text-red-600 dark:text-red-400">
@@ -85,22 +85,26 @@
                                     <% } %>
                                   </label>
                             </div>
-
-                            <div class="grid-span-1 mt-4">
-                                <label class="block text-sm">
+                            <div class="grid-span-1">
+                                  <label class="block text-sm">
                                     <span class="text-gray-700 dark:text-gray-400">
-                                      Specialty
+                                      Date of birth
                                     </span>
-                                    <select
-                                      class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                                      name="specialty"
-                                    >
-                                      <option value="" <c:if test="${trainer.specialty == ''}"> selected </c:if> >Select spcialty</option>
-                                      <option value="yoga" <c:if test="${trainer.specialty == 'yoga'}"> selected </c:if>>yoga</option>
-                                      <option value="muay thai" <c:if test="${trainer.specialty == 'muay thai'}"> selected </c:if>>muay thai</option>
-                                    </select>
-                                </label>
+                                    <input
+                                        type="date"
+                                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                        placeholder="Member email"
+                                        name="dateOfBirth"
+                                        value="<c:out value='${member.dateOfBirth}' />"
+                                    />
+                                    <% if (errors != null && errors.containsKey("dateOfBirth")) { %>
+                                          <span class="text-xs text-red-600 dark:text-red-400">
+                                            <%= errors.get("dateOfBirth") %>
+                                          </span>
+                                    <% } %>
+                                  </label>
                             </div>
+
                             <button
                                 type="submit"
                                 class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"

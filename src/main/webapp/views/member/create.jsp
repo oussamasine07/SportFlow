@@ -88,6 +88,25 @@
                             <div class="grid-span-1">
                                   <label class="block text-sm">
                                     <span class="text-gray-700 dark:text-gray-400">
+                                      Date of birth
+                                    </span>
+                                    <input
+                                        type="date"
+                                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                        placeholder="Member email"
+                                        name="dateOfBirth"
+                                        value=""
+                                    />
+                                    <% if (errors != null && errors.containsKey("dateOfBirth")) { %>
+                                          <span class="text-xs text-red-600 dark:text-red-400">
+                                            <%= errors.get("dateOfBirth") %>
+                                          </span>
+                                    <% } %>
+                                  </label>
+                            </div>
+                            <div class="grid-span-1">
+                                  <label class="block text-sm">
+                                    <span class="text-gray-700 dark:text-gray-400">
                                       Password
                                     </span>
                                     <input

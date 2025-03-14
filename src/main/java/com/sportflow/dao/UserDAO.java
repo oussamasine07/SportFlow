@@ -12,7 +12,7 @@ public class UserDAO extends ConnectToDB {
     private static final String GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?;";
     private static final String INSERT_INTO_USERS = "INSERT INTO users (firstName, lastName, email, password, isAdmin, role) VALUES (?, ?, ?, ?, ?, ?);";
     private static final String ADD_TRAINER = "INSERT INTO trainers (user_id, belongsTo) values (?, ?);";
-    private static final String ADD_MAMBER = "INSERT INTO members (user_id, belongsTo) values (?, ?);";
+    private static final String ADD_MAMBER = "INSERT INTO members (user_id, belongsTo, dateOfBirth) values (?, ?, ?);";
     private static final String UPDATE_USER_BY_ID = "UPDATE users\n" +
             "    SET firstName = ?,\n" +
             "    lastName = ?,\n" +
@@ -49,35 +49,6 @@ public class UserDAO extends ConnectToDB {
     }
 
 
-
-//    public void registerUser (RegisterDTO register) {
-//
-//        try (
-//                Connection con = getConnection();
-//                PreparedStatement stmt = con.prepareStatement(INSERT_INTO_USERS, Statement.RETURN_GENERATED_KEYS);
-//        ){
-//
-//            stmt.setString(1, register.getFirstName());
-//            stmt.setString(2, register.getLastName());
-//            stmt.setString(3, register.getEmail());
-//            stmt.setString(4, register.getPassword());
-//            stmt.setBoolean(5, register.getIsAdmin());
-//
-//            stmt.executeUpdate();
-//            ResultSet rs = stmt.getGeneratedKeys();
-//
-//            if (rs.next()) {
-//                int userId = rs.getInt(1); // Typically, the first column returned is the generated id
-//                if ("trainer".equals(register.getRole())) addTrainer(userId, 0);
-//                if ("member".equals(register.getRole())) addMember(userId, 0);
-//            }
-//
-//        }
-//        catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public void registerUser (RegisterDTO register, int belongsTo) {
 
         try (
@@ -98,7 +69,7 @@ public class UserDAO extends ConnectToDB {
             if (rs.next()) {
                 int userId = rs.getInt(1); // Typically, the first column returned is the generated id
                 if ("trainer".equals(register.getRole())) addTrainer(userId, belongsTo);
-                if ("member".equals(register.getRole())) addMember(userId, belongsTo);
+                if ("member".equals(register.getRole())) addMember(userId, belongsTo, register.getDateOfBirth());
             }
 
         }
@@ -126,7 +97,7 @@ public class UserDAO extends ConnectToDB {
         }
     }
 
-    public void addMember ( int memberId, int belongsTo ) {
+    public void addMember ( int memberId, int belongsTo, String dateOfBirth ) {
         try (
                 Connection con = getConnection();
                 PreparedStatement stmt = con.prepareStatement(ADD_MAMBER);
@@ -137,6 +108,7 @@ public class UserDAO extends ConnectToDB {
             } else {
                 stmt.setNull(2, Types.INTEGER);
             }
+            stmt.setString(3, dateOfBirth);
             stmt.executeUpdate();
         }
         catch (SQLException e) {

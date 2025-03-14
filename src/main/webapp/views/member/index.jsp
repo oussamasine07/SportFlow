@@ -24,8 +24,8 @@
                               <tr
                                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                               >
-                                <th class="px-4 py-3">Trainer</th>
-                                <th class="px-4 py-3">Specialty</th>
+                                <th class="px-4 py-3">Member</th>
+                                <th class="px-4 py-3">Date of birth</th>
                                 <th class="px-4 py-3">Actions</th>
                               </tr>
                             </thead>
@@ -66,7 +66,7 @@
                                         <!-- Avatar with inset shadow -->
                                         <div>
                                           <p class="font-semibold">
-
+                                            <c:out value="${member.dateOfBirth}" />
                                           </p>
                                         </div>
                                       </div>
