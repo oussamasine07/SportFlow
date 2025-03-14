@@ -10,7 +10,7 @@ import java.sql.*;
 public class UserDAO extends ConnectToDB {
 
     private static final String GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?;";
-    private static final String INSERT_INTO_USERS = "INSERT INTO users (firstName, lastName, email, password, isAdmin) VALUES (?, ?, ?, ?, ?);";
+    private static final String INSERT_INTO_USERS = "INSERT INTO users (firstName, lastName, email, password, isAdmin, role) VALUES (?, ?, ?, ?, ?, ?);";
     private static final String ADD_TRAINER = "INSERT INTO trainers (user_id, belongsTo) values (?, ?);";
     private static final String ADD_MAMBER = "INSERT INTO members (user_id, belongsTo) values (?, ?);";
     private static final String UPDATE_USER_BY_ID = "UPDATE users\n" +
@@ -90,7 +90,8 @@ public class UserDAO extends ConnectToDB {
             stmt.setString(3, register.getEmail());
             stmt.setString(4, register.getPassword());
             stmt.setBoolean(5, register.getIsAdmin());
-
+            stmt.setString(6, register.getRole());
+            System.out.println(stmt.toString());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
 

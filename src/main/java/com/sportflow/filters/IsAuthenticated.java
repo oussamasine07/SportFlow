@@ -19,7 +19,12 @@ public class IsAuthenticated implements Filter {
             "/user/profile",
             "/trainer",
             "/trainer/create",
-            "/trainer/edit"
+            "/trainer/edit",
+            "/trainer/delete",
+            "/member",
+            "/member/create",
+            "/member/edit",
+            "/member/delete"
     };
 
     private HttpServletRequest req = null;
