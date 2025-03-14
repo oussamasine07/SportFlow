@@ -31,8 +31,7 @@ public class ListTrainersServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         List<Trainer> trainers = trainerDAO.getAllTrainersByAuthenticatedUser(user.getId());
-
-        trainers.forEach(trainer -> System.out.println(trainer.getFirstName()));
+        req.setAttribute("trainers", trainers);
         RequestDispatcher rd = req.getRequestDispatcher("/views/trainer/index.jsp");
         rd.forward(req, res);
 

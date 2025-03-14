@@ -11,10 +11,17 @@ import java.util.List;
 
 public class TrainerDAO extends ConnectToDB {
 
-    private static final String GET_TRAINERS_BY_AUTH_USER = "SELECT * FROM users\n" +
+    private static final String GET_TRAINERS_BY_AUTH_USER = "SELECT \n" +
+            "\tfirstName,\n" +
+            "    lastName,\n" +
+            "    email,\n" +
+            "    trainers.id,\n" +
+            "    trainers.specialty,\n" +
+            "    trainers.user_id\n" +
+            "FROM users\n" +
             "inner join trainers\n" +
-            "on users.id = trainers.belongsTo\n" +
-            "WHERE users.id = ?;";
+            "on users.id = trainers.user_id\n" +
+            "WHERE trainers.belongsTo = ?;";
 
 
     public List<Trainer> getAllTrainersByAuthenticatedUser ( int belongsTo ) {
@@ -29,9 +36,11 @@ public class TrainerDAO extends ConnectToDB {
 
             while (rs.next()){
                 Trainer trainer = new Trainer();
+                trainer.setId(rs.getInt("user_id"));
                 trainer.setFirstName(rs.getString("firstName"));
                 trainer.setLastName(rs.getString("lastName"));
                 trainer.setEmail(rs.getString("email"));
+                trainer.setSpecialty(rs.getString("specialty"));
                 trainers.add(trainer);
             }
 
