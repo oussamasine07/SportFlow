@@ -21,6 +21,7 @@ public class UserDAO extends ConnectToDB {
 
     private static final String DELETE_USER_BY_ID = "DELETE FROM users WHERE id = ?";
 
+
     public UserDAO () {}
 
     public User getUserByEmail (String email) {
@@ -46,6 +47,8 @@ public class UserDAO extends ConnectToDB {
         return user;
 
     }
+
+
 
 //    public void registerUser (RegisterDTO register) {
 //
