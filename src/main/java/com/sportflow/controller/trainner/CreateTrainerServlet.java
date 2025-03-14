@@ -1,4 +1,4 @@
-package com.sportflow.controller.auth;
+package com.sportflow.controller.trainner;
 
 import com.password4j.BcryptFunction;
 import com.password4j.Hash;
@@ -24,31 +24,27 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet("/auth/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/trainer/create")
+public class CreateTrainerServlet extends HttpServlet {
 
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = factory.getValidator();
 
     UserDAO userDAO = null;
-
     public void init () {
         userDAO = new UserDAO();
     }
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse res)
+    protected void doGet (HttpServletRequest req, HttpServletResponse res)
         throws ServletException, IOException
     {
-
-        RequestDispatcher rd = req.getRequestDispatcher("/views/auth/register.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/views/trainer/create.jsp");
         rd.forward(req, res);
-
     }
 
     protected void doPost (HttpServletRequest req, HttpServletResponse res)
         throws ServletException, IOException
     {
-
         User user = null;
 
         String firstName = req.getParameter("firstName");
@@ -57,13 +53,12 @@ public class RegisterServlet extends HttpServlet {
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
 
-        System.out.println(firstName);
-
         RegisterDTO registerDTO = new RegisterDTO(firstName, lastName, email, password, confirmPassword);
 
 
         Set<ConstraintViolation<RegisterDTO>> violations = validator.validate(registerDTO);
         HttpSession session = req.getSession();
+        User authUser = (User) session.getAttribute("user");
         Map<String, String> errors = new HashMap<>();
 
         if (!violations.isEmpty()) {
@@ -75,13 +70,13 @@ public class RegisterServlet extends HttpServlet {
             session.setAttribute("errors", errors);
             session.setAttribute("old", registerDTO);
 
-            res.sendRedirect(req.getContextPath() + "/auth/register");
+            res.sendRedirect(req.getContextPath() + "/trainer/create");
 
         } else {
             user = userDAO.getUserByEmail(registerDTO.getEmail());
             if (user != null ) {
                 session.setAttribute("errorUser", "this email is already taken");
-                res.sendRedirect(req.getContextPath() + "/auth/register");
+                res.sendRedirect(req.getContextPath() + "/trainer/create");
             } else {
                 // hash password
                 BcryptFunction bcrypt = BcryptFunction.getInstance(Bcrypt.B, 12);
@@ -90,10 +85,10 @@ public class RegisterServlet extends HttpServlet {
                         .with(bcrypt);
                 registerDTO.setPassword(hash.getResult());
                 registerDTO.setRole("trainer");
-                registerDTO.setIsAdmin(true);
-                userDAO.registerUser( registerDTO, 0 );
+                registerDTO.setIsAdmin(false);
+                userDAO.registerUser( registerDTO, authUser.getId() );
                 session.setAttribute("registerSuccess", "Register success, Please login");
-                res.sendRedirect(req.getContextPath() + "/auth/login");
+                res.sendRedirect(req.getContextPath() + "/trainer");
             }
 
         }

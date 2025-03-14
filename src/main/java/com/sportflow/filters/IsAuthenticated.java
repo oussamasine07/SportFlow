@@ -16,7 +16,10 @@ public class IsAuthenticated implements Filter {
 
     private String[] protectedURIs = {
             "/user/dashboard",
-            "/user/profile"
+            "/user/profile",
+            "/trainer",
+            "/trainer/create",
+            "/trainer/edit"
     };
 
     private HttpServletRequest req = null;

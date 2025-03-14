@@ -14,15 +14,46 @@ CREATE TABLE users (
 CREATE TABLE members (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id int not null,
-    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE NULL
+    belongsTo int null,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(belongsTo) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE trainers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id int not null,
     specialty VARCHAR(255) not null,
-    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE NULL
+    belongsTo INT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(belongsTo) REFERENCES users(id) ON DELETE CASCADE
 );
+
+SELECT * FROM users
+inner join trainers
+on users.id = trainers.belongsTo
+WHERE users.id = 1;
+
+SELECT
+    id,
+    firstName,
+    lastName,
+    email,
+    specialty
+FROM users
+inner join trainers
+on users.id = trainers.user_id
+where users.id = 2;
+
+UPDATE users
+SET
+    firstName = ?,
+    lastName = ?,
+    email = ?
+WHERE id = ?;
+UPDATE trainers
+SET
+    specialty = ?
+WHERE user_id = ?;
 
 
 
