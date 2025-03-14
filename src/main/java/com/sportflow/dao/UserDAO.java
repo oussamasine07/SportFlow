@@ -175,4 +175,41 @@ public class UserDAO extends ConnectToDB {
         return user;
     }
 
+    public void deleteUserById(int userId) {
+        try (
+                Connection con = getConnection();
+                PreparedStatement stmt = con.prepareStatement(DELETE_USER_BY_ID);
+        ){
+
+            stmt.setInt(1, userId);
+            stmt.executeUpdate();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
