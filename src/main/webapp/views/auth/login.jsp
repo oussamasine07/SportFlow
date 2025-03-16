@@ -44,13 +44,13 @@
             <img
               aria-hidden="true"
               class="object-cover w-full h-full dark:hidden"
-              src="${pageContext.request.contextPath}/resources/assets/img/login-office.jpeg"
+              src="${pageContext.request.contextPath}/resources/assets/img/login.jpg"
               alt="Office"
             />
             <img
               aria-hidden="true"
               class="hidden object-cover w-full h-full dark:block"
-              src="../assets/img/login-office-dark.jpeg"
+              src="${pageContext.request.contextPath}/resources/assets/img/login.jpg"
               alt="Office"
             />
           </div>
@@ -63,13 +63,13 @@
               </h1>
 
                <% if (errorUser != null) { %>
-                   <div class="alert alert-danger  alert-dismissible fade show" role="alert">
-                     <strong><%= errorUser %></strong>
+                   <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                     <strong class="font-bold"><%= errorUser %></strong>
                    </div>
                <% } %>
                <% if (registerSuccess != null) { %>
-                   <div class="alert alert-success  alert-dismissible fade show" role="alert">
-                     <strong><%= registerSuccess %></strong>
+                   <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                     <strong class="font-bold"><%= registerSuccess %></strong>
                    </div>
                <% } %>
 

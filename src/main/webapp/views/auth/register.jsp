@@ -41,13 +41,13 @@
             <img
               aria-hidden="true"
               class="object-cover w-full h-full dark:hidden"
-              src="${pageContext.request.contextPath}/resources/assets/img/create-account-office.jpeg"
+              src="${pageContext.request.contextPath}/resources/assets/img/register.jpg"
               alt="Office"
             />
             <img
               aria-hidden="true"
               class="hidden object-cover w-full h-full dark:block"
-              src="${pageContext.request.contextPath}/resources/assets/img/create-account-office-dark.jpeg"
+              src="${pageContext.request.contextPath}/resources/assets/img/register.jpg"
               alt="Office"
             />
           </div>
